@@ -1,0 +1,47 @@
+ext {
+    hilt_jetpack = '2.40.5'
+    navitation_jetpack = '2.3.5'
+    viewmodel_life_cycle = '2.4.0'
+    paging_jetpack = '3.1.0'
+    room_jetpack = '2.3.0'
+    retrofit = '2.9.0'
+    retrofit_gson_converter = '2.9.0'
+    interceptor = '4.9.3'
+    okhttp = '4.9.3'
+    arch_version = '2.1.0'
+}
+
+dependencies {
+    // hilt
+    implementation "com.google.dagger:hilt-android:$hilt_jetpack"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_jetpack"
+
+    // retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_gson_converter"
+    implementation "com.squareup.okhttp3:logging-interceptor:$interceptor"
+    implementation "com.squareup.okhttp3:okhttp:$okhttp"
+
+    // navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$navitation_jetpack"
+    implementation "androidx.navigation:navigation-ui-ktx:$navitation_jetpack"
+    androidTestImplementation("androidx.navigation:navigation-testing:$navitation_jetpack")
+
+    // ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$viewmodel_life_cycle"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$viewmodel_life_cycle"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$viewmodel_life_cycle"
+    testImplementation("androidx.arch.core:core-testing:$arch_version")
+
+    // Paging
+    implementation("androidx.paging:paging-runtime-ktx:$paging_jetpack")
+    testImplementation("androidx.paging:paging-common-ktx:$paging_jetpack")
+
+    // Room
+    implementation("androidx.room:room-runtime:$room_jetpack")
+    annotationProcessor("androidx.room:room-compiler:$room_jetpack")
+    kapt("androidx.room:room-compiler:$room_jetpack")
+    implementation("androidx.room:room-ktx:$room_jetpack")
+    testImplementation("androidx.room:room-testing:$room_jetpack")
+    implementation("androidx.room:room-paging:2.4.0-beta02")
+}
