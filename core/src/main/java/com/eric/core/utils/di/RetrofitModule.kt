@@ -17,7 +17,7 @@ class RetrofitModule {
 
     @Singleton
     @Provides
-    fun providesRetrofitInstance(apiClass: Class<*>, url: String) : Any{
+    fun providesRetrofitInstance(): Retrofit {
 
         var retrofit: Retrofit?
 
@@ -29,13 +29,11 @@ class RetrofitModule {
         okHttpClient.addInterceptor(httpLoggingInterceptor)
 
         retrofit = Retrofit.Builder()
-            .baseUrl(url)
+            .baseUrl( "https://gateway.marvel.com/")
             .client(okHttpClient.build())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        return retrofit!!.create(apiClass)
+        return retrofit
     }
-
- //   fun providesCreateApi()
 }

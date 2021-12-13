@@ -5,13 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.eric.marvelapi.R
 import com.eric.marvelapi.comics.ui.adapter.ComicsAdapter
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_comics.*
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class ComicsFragment : Fragment() {
+
+    private val viewModel : ComicsViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,12 +37,11 @@ class ComicsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val viewModel = ComicsViewModel()
-
         lifecycleScope.launch {
             viewModel.getComics().collectLatest {
-                ComicsAdapter(it.results.toMutableList())
-         //       comicReciclerView
+               val adapter = ComicsAdapter(it.results.toMutableList())
+                reciclerView.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+                reciclerView.adapter = adapter
             }
         }
     }

@@ -1,5 +1,6 @@
 ext {
     hilt_jetpack = '2.40.5'
+    hilt_view_model = '1.0.0-alpha03'
     navitation_jetpack = '2.3.5'
     viewmodel_life_cycle = '2.4.0'
     paging_jetpack = '3.1.0'
@@ -9,11 +10,13 @@ ext {
     interceptor = '4.9.3'
     okhttp = '4.9.3'
     arch_version = '2.1.0'
+    picasso = '2.8'
 }
 
 dependencies {
     // hilt
     implementation "com.google.dagger:hilt-android:$hilt_jetpack"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_view_model"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_jetpack"
 
     // retrofit
@@ -44,4 +47,7 @@ dependencies {
     implementation("androidx.room:room-ktx:$room_jetpack")
     testImplementation("androidx.room:room-testing:$room_jetpack")
     implementation("androidx.room:room-paging:2.4.0-beta02")
+
+    // Picasso
+    implementation "com.squareup.picasso:picasso:$picasso"
 }

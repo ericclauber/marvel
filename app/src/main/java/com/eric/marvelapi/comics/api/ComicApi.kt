@@ -1,6 +1,5 @@
 package com.eric.marvelapi.comics.api
 
-import kotlinx.coroutines.flow.Flow
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
