@@ -6,9 +6,11 @@ import com.eric.marvelapi.comics.data.Keys
 import com.eric.marvelapi.comics.model.Data
 import com.eric.marvelapi.comics.ui.adapter.Mapper
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.flow
 
 class ComicsViewModel : ViewModel() {
+
+    var response: Flow<Data>? = null
 
     fun getComics(): Flow<Data> {
         val api = RetrofitBuilder
@@ -17,11 +19,16 @@ class ComicsViewModel : ViewModel() {
                 ComicApi::class.java
             ) as ComicApi
 
-        return api.getComics(
-            25,
-            1,
-            Keys.getTimeStamp(),
-            Keys.getApiKey(),
-            Keys.getHash()).map { Mapper.mapper(it.data) }
+        return flow {
+           emit(Mapper.mapper(
+               api.getComics(
+                   25,
+                   1,
+                   Keys.getTimeStamp(),
+                   Keys.getApiKey(),
+                   Keys.getHash()
+               ).data)
+            )
+        }
     }
 }

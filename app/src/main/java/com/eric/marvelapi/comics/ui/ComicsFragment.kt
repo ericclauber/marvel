@@ -35,7 +35,7 @@ class ComicsFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.getComics().collectLatest {
                 ComicsAdapter(it.results.toMutableList())
-                comicReciclerView
+         //       comicReciclerView
             }
         }
     }
