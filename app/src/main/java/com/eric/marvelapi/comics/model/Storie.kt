@@ -1,8 +1,12 @@
 package com.eric.marvelapi.comics.model
 
+import androidx.room.Entity
+import com.google.gson.annotations.SerializedName
+
+@Entity(tableName = "storie")
 data class Storie (
 
-	val resourceURI : String,
-	val name : String,
-	val type : String
+	@field:SerializedName("resourceURI") val resourceURI : String,
+	@field:SerializedName("name") val name : String,
+	@field:SerializedName("type") val type : String
 )
