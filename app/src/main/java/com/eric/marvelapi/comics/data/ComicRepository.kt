@@ -11,12 +11,12 @@ import javax.inject.Inject
 
 class ComicRepository @Inject constructor(
     private val service: Retrofit,
-    private val database: ComicDatabase
+    private val database: ComicDatabase?
 ) {
 
-    fun getComics(): Flow<Data> {
+    private val api = service.create(ComicApi::class.java)
 
-        val api = service.create(ComicApi::class.java)
+    fun getComics(): Flow<Data> {
 
         return flow {
             emit(

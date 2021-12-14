@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.eric.marvelapi.R
-import com.eric.marvelapi.comics.model.Comic
+import com.eric.marvelapi.comics.model.ComicModel
 
-class ComicsAdapter(val comicList: MutableList<Comic>) :
+class ComicsAdapter(val comicList: MutableList<ComicModel>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComicsViewHolder {

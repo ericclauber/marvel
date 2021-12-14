@@ -6,6 +6,6 @@ import com.google.gson.annotations.SerializedName
 @Entity(tableName = "thumbnail")
 data class Thumbnail(
 
-    @field:SerializedName("path") var path: String,
-    @field:SerializedName("extension") val extension: String
+    @field:SerializedName("path") var path: String? = null,
+    @field:SerializedName("extension") val extension: String? = null
 )

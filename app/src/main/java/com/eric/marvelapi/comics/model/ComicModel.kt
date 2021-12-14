@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "comic")
-data class Comic(
+data class ComicModel(
 
     @PrimaryKey @field:SerializedName("id") val id: Int? = null,
     @field:SerializedName("digitalId") val digitalId: Int? = null,
@@ -22,19 +22,8 @@ data class Comic(
     @field:SerializedName("issn") val issn: String? = null,
     @field:SerializedName("format") val format: String? = null,
     @field:SerializedName("pageCount") val pageCount: Int? = null,
-    @Embedded val textObjects: List<TextObjects>? = null,
     @field:SerializedName("resourceURI") val resourceURI: String? = null,
-    @Embedded val urls: List<Urls>? = null,
     @Embedded(prefix = "series_") val series: Series? = null,
-    @Embedded val variants: List<CollectedIssue>? = null,
-    @Embedded val collections: List<CollectedIssue>? = null,
-    @Embedded val collectedIssues: List<CollectedIssue>? = null,
-    @Embedded val dates: List<Dates>? = null,
-    @Embedded val prices: List<Prices>? = null,
-    @Embedded val thumbnail: Thumbnail? = null,
-    @Embedded val images: List<Image>? = null,
-    @Embedded(prefix = "creators_") val creators: Creators? = null,
-    @Embedded(prefix = "scharacters_") val characters: Characters? = null,
-    @Embedded(prefix = "stories_") val stories: Stories? = null,
-    @Embedded(prefix = "events_") val events: Events? = null
+    @Embedded val price: Prices? = null,
+    @Embedded val thumbnail: Thumbnail? = null
 )

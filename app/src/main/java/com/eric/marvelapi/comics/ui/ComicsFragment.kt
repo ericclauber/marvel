@@ -39,7 +39,7 @@ class ComicsFragment : Fragment() {
 
         lifecycleScope.launch {
             viewModel.getComics().collectLatest {
-               val adapter = ComicsAdapter(it.results.toMutableList())
+               val adapter = ComicsAdapter(it.comicList.toMutableList())
                 reciclerView.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
                 reciclerView.adapter = adapter
             }

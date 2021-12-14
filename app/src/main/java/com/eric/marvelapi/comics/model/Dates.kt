@@ -6,6 +6,6 @@ import com.google.gson.annotations.SerializedName
 @Entity(tableName = "dates")
 data class Dates (
 
-	@field:SerializedName("type") val type : String,
-	@field:SerializedName("date") val date : String
+	@field:SerializedName("type") val type : String? = null,
+	@field:SerializedName("date") val date : String? = null
 )

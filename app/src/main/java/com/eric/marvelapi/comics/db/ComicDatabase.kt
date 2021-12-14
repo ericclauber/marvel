@@ -2,10 +2,10 @@ package com.eric.marvelapi.comics.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.eric.marvelapi.comics.model.Comic
+import com.eric.marvelapi.comics.model.ComicModel
 
 @Database(
-    entities = arrayOf(Comic::class),
+    entities = arrayOf(ComicModel::class),
     version = 1,
     exportSchema = false
 )

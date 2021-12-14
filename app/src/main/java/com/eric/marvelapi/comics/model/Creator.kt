@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 @Entity(tableName = "creator")
 data class Creator (
 
-	@field:SerializedName("resourceURI") val resourceURI : String,
-	@field:SerializedName("name") val name : String,
-	@field:SerializedName("role") val role : String
+	@field:SerializedName("resourceURI") val resourceURI : String? = null,
+	@field:SerializedName("name") val name : String? = null,
+	@field:SerializedName("role") val role : String? = null
 )

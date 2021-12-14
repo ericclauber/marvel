@@ -16,19 +16,18 @@ private const val DB_NAME = "ComicDatabase.db"
 @Module
 class ComicDatabaseModule {
 
-   private var comicDatabase: ComicDatabase? = null
+    private var comicDatabase: ComicDatabase? = null
 
     @Provides
     @Singleton
-    fun providesDatabase(@ApplicationContext context: Context) =
-        comicDatabase ?: synchronized(this) {
-            comicDatabase = buildDatabase(context)
+    fun providesDatabase(@ApplicationContext context: Context): ComicDatabase? {
+        synchronized(this) {
+            comicDatabase ?: Room.databaseBuilder(
+                context.applicationContext,
+                ComicDatabase::class.java,
+                DB_NAME
+            ).build()
         }
-
-    private fun buildDatabase(context: Context) =
-        Room.databaseBuilder(
-            context.applicationContext,
-            ComicDatabase::class.java,
-            DB_NAME
-        ).build()
+        return comicDatabase
+    }
 }
