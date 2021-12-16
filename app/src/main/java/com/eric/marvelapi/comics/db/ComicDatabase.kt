@@ -9,4 +9,6 @@ import com.eric.marvelapi.comics.model.ComicModel
     version = 1,
     exportSchema = false
 )
-abstract class ComicDatabase : RoomDatabase()
+abstract class ComicDatabase : RoomDatabase(){
+    abstract fun comicDAO() : ComicDao
+}
