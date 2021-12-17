@@ -12,15 +12,13 @@ import kotlinx.coroutines.flow.Flow
 import retrofit2.Retrofit
 import javax.inject.Inject
 
-private const val PAGE_SIZE = 25
+const val PAGE_SIZE = 25
 const val INITIAL_PAGE = 1
 
 class ComicRepository @Inject constructor(
     private val service: Retrofit,
     private val database: ComicDatabase
 ) {
-
-    private val api = service.create(ComicApi::class.java)
 
     @OptIn(ExperimentalPagingApi::class)
     fun getComics(): Flow<PagingData<ComicModel>> {
@@ -40,21 +38,4 @@ class ComicRepository @Inject constructor(
             pagingSourceFactory = pagingSourceFactory
         ).flow
     }
-
-//    fun getComics(): Flow<Data> {
-//
-//        return flow {
-//            emit(
-//                Mapper.mapper(
-//                    api.getComics(
-//                        25,
-//                        1,
-//                        Keys.getTimeStamp(),
-//                        Keys.getApiKey(),
-//                        Keys.getHash()
-//                    ).data
-//                )
-//            )
-//        }
-//    }
 }

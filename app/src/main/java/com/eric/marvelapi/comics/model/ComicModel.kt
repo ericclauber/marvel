@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName
 @Entity(tableName = "comic")
 data class ComicModel(
 
-    @PrimaryKey @field:SerializedName("id") val id: Int? = null,
+    @PrimaryKey @field:SerializedName("id") val id: Int,
     @field:SerializedName("digitalId") val digitalId: Int? = null,
     @field:SerializedName("title") val title: String? = null,
     @field:SerializedName("issueNumber") val issueNumber: Int? = null,

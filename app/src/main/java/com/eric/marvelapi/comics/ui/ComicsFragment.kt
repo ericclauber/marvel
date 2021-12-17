@@ -10,9 +10,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.eric.marvelapi.R
+import com.eric.marvelapi.comics.ui.adapter.ComicLoadStateAdapter
 import com.eric.marvelapi.comics.ui.adapter.ComicsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_comics.*
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -21,6 +23,7 @@ class ComicsFragment : Fragment() {
 
     private val viewModel: ComicsViewModel by viewModels()
     private val adapter = ComicsAdapter()
+    private var job: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,13 +41,13 @@ class ComicsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        init()
         configureRecyclerView()
+        init()
     }
 
-    private fun init(){
-        lifecycleScope.launch {
+    private fun init() {
+        job?.cancel()
+        job = lifecycleScope.launch {
             viewModel.getComics().collectLatest {
                 adapter.submitData(it)
             }
@@ -60,6 +63,7 @@ class ComicsFragment : Fragment() {
                 DividerItemDecoration.VERTICAL
             )
         )
-        reciclerView.adapter = adapter
+        reciclerView.adapter =
+            adapter.withLoadStateHeaderAndFooter(ComicLoadStateAdapter(), ComicLoadStateAdapter())
     }
 }

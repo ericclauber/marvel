@@ -10,7 +10,7 @@ interface ComicApi {
     @GET("v1/public/comics")
    suspend fun getComics(
         @Query("limit") limit: Int,
-        @Query("offset") offset: Int,
+        @Query("offset") offset: Int?,
         @Query("ts") timestamp: String,
         @Query("apikey") apikey: String,
         @Query("hash") hash: String

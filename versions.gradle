@@ -30,10 +30,11 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$navitation_jetpack"
     androidTestImplementation("androidx.navigation:navigation-testing:$navitation_jetpack")
 
-    // ViewModel
+    // ViewModel / lifecycle
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$viewmodel_life_cycle"
     implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$viewmodel_life_cycle"
     implementation "androidx.lifecycle:lifecycle-common-java8:$viewmodel_life_cycle"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$viewmodel_life_cycle"
     testImplementation("androidx.arch.core:core-testing:$arch_version")
 
     // Paging
