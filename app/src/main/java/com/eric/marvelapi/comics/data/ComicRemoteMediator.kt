@@ -9,6 +9,7 @@ import com.eric.marvelapi.comics.api.ComicApi
 import com.eric.marvelapi.comics.db.ComicDatabase
 import com.eric.marvelapi.comics.db.ComicRemoteKeys
 import com.eric.marvelapi.comics.model.ComicModel
+import com.eric.marvelapi.comics.ui.adapter.Mapper
 import retrofit2.HttpException
 import retrofit2.Retrofit
 import java.io.IOException
@@ -46,24 +47,15 @@ class ComicRemoteMediator(
         }
 
         try {
-            val response = api.getComics(
+            val response = Mapper.mapper(api.getComics(
                 state.config.pageSize,
                 page,
                 Keys.getTimeStamp(),
                 Keys.getApiKey(),
                 Keys.getHash()
-            ).data
+            ).data)
 
             val endOfPaginationReached = response.results.isEmpty()
-
-            response.comicList = response.results.map {
-                ComicModel(
-                    id = it.id,
-                    title = it.title,
-                    thumbnail = it.thumbnail,
-                    price = it.prices?.get(0)
-                )
-            }
 
             database.withTransaction {
                 if (loadType == LoadType.REFRESH) {

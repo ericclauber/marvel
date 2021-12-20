@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.eric.marvelapi.R
@@ -55,6 +57,8 @@ class ComicsFragment : Fragment() {
     }
 
     private fun configureRecyclerView() {
+        configureLoadStateAdapter()
+
         reciclerView.layoutManager =
             LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         reciclerView.addItemDecoration(
@@ -65,5 +69,13 @@ class ComicsFragment : Fragment() {
         )
         reciclerView.adapter =
             adapter.withLoadStateHeaderAndFooter(ComicLoadStateAdapter(), ComicLoadStateAdapter())
+    }
+
+    private fun configureLoadStateAdapter() {
+        adapter.addLoadStateListener { combinedLoadStates ->
+            reciclerView.isVisible = combinedLoadStates.mediator?.refresh is LoadState.NotLoading
+            progressBar.isVisible = combinedLoadStates.mediator?.refresh is LoadState.Loading
+            retryButton.isVisible = combinedLoadStates.mediator?.refresh is LoadState.Error
+        }
     }
 }

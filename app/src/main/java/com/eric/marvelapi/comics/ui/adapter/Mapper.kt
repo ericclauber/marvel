@@ -15,8 +15,10 @@ object Mapper {
                 .results[index]
                 .thumbnail?.path =
                 "${comic.thumbnail?.path}/$IMAGE_VARIANT.${comic.thumbnail?.extension}"
+                    .replace("http", "https")
         }
-        dataMapper.comicList = data.results.map {
+        dataMapper.comicList = dataMapper.results.map {
+
             ComicModel(
                 id = it.id,
                 title = it.title,
