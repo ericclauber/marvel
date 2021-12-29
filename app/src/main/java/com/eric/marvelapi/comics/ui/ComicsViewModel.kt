@@ -14,8 +14,6 @@ import javax.inject.Inject
 @HiltViewModel
 class ComicsViewModel @Inject constructor(private val repository: ComicRepository) : ViewModel() {
 
-    private lateinit var comics: Flow<PagingData<ComicModel>>
-
     fun getComics(): Flow<PagingData<ComicModel>> {
         return repository.getComics()
     }
