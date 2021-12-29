@@ -9,7 +9,7 @@ import com.eric.marvelapi.comics.api.ComicApi
 import com.eric.marvelapi.comics.db.ComicDatabase
 import com.eric.marvelapi.comics.db.ComicRemoteKeys
 import com.eric.marvelapi.comics.model.ComicModel
-import com.eric.marvelapi.comics.ui.adapter.Mapper
+import com.eric.marvelapi.comics.ui.adapter.ComicMapper
 import retrofit2.HttpException
 import retrofit2.Retrofit
 import java.io.IOException
@@ -47,7 +47,7 @@ class ComicRemoteMediator(
         }
 
         try {
-            val response = Mapper.mapper(api.getComics(
+            val response = ComicMapper.mapper(api.getComics(
                 state.config.pageSize,
                 page,
                 Keys.getTimeStamp(),
