@@ -2,9 +2,7 @@ package com.eric.marvelapi.comics.di
 
 import android.content.Context
 import androidx.room.Room
-import com.eric.marvelapi.comics.db.ComicDao
 import com.eric.marvelapi.comics.db.ComicDatabase
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,9 +26,10 @@ class ComicDatabaseModule {
                 context.applicationContext,
                 ComicDatabase::class.java,
                 DB_NAME
-            ).build().apply {
-                comicDatabase = this
-            }
+            ).fallbackToDestructiveMigration()
+                .build().apply {
+                    comicDatabase = this
+                }
         }
         return comicDatabase!!
     }

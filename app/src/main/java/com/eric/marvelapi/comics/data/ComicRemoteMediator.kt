@@ -40,7 +40,7 @@ class ComicRemoteMediator(
                 val remoteKeys = getRemoteKeyForLastItem(state)
                 val nextKey = remoteKeys?.nextKey
                 if (nextKey == null){
-                    return MediatorResult.Success(true)
+                    return MediatorResult.Success(remoteKeys != null)
                 }
                 nextKey
             }
