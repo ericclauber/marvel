@@ -25,13 +25,9 @@ class ComicsFragment : Fragment() {
 
     private val viewModel: ComicsViewModel by viewModels()
     private val adapter = ComicsAdapter()
-    private var job: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-
-        }
     }
 
     override fun onCreateView(
@@ -48,8 +44,7 @@ class ComicsFragment : Fragment() {
     }
 
     private fun init() {
-        job?.cancel()
-        job = lifecycleScope.launch {
+        lifecycleScope.launch {
             viewModel.getComics().collectLatest {
                 adapter.submitData(it)
             }
@@ -68,7 +63,7 @@ class ComicsFragment : Fragment() {
             )
         )
         reciclerView.adapter =
-            adapter.withLoadStateHeaderAndFooter(ComicLoadStateAdapter(), ComicLoadStateAdapter())
+            adapter.withLoadStateFooter(ComicLoadStateAdapter())
     }
 
     private fun configureLoadStateAdapter() {
@@ -77,5 +72,7 @@ class ComicsFragment : Fragment() {
             progressBar.isVisible = combinedLoadStates.mediator?.refresh is LoadState.Loading
             retryButton.isVisible = combinedLoadStates.mediator?.refresh is LoadState.Error
         }
+
+        retryButton.setOnClickListener { adapter.retry() }
     }
 }
