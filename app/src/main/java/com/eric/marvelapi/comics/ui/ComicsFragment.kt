@@ -11,12 +11,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.eric.marvelapi.R
 import com.eric.marvelapi.comics.ui.adapter.ComicLoadStateAdapter
 import com.eric.marvelapi.comics.ui.adapter.ComicsAdapter
+import com.eric.marvelapi.databinding.FragmentComicsBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_comics.*
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -25,16 +23,16 @@ class ComicsFragment : Fragment() {
 
     private val viewModel: ComicsViewModel by viewModels()
     private val adapter = ComicsAdapter()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private lateinit var binding: FragmentComicsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_comics, container, false)
+        return FragmentComicsBinding.inflate(inflater, container, false)
+            .also {
+                binding = it
+            }.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,25 +52,27 @@ class ComicsFragment : Fragment() {
     private fun configureRecyclerView() {
         configureLoadStateAdapter()
 
-        reciclerView.layoutManager =
+        binding.reciclerView.layoutManager =
             LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
-        reciclerView.addItemDecoration(
+        binding.reciclerView.addItemDecoration(
             DividerItemDecoration(
                 requireContext(),
                 DividerItemDecoration.VERTICAL
             )
         )
-        reciclerView.adapter =
+        binding.reciclerView.adapter =
             adapter.withLoadStateFooter(ComicLoadStateAdapter())
     }
 
     private fun configureLoadStateAdapter() {
         adapter.addLoadStateListener { combinedLoadStates ->
-            reciclerView.isVisible = combinedLoadStates.mediator?.refresh is LoadState.NotLoading
-            progressBar.isVisible = combinedLoadStates.mediator?.refresh is LoadState.Loading
-            retryButton.isVisible = combinedLoadStates.mediator?.refresh is LoadState.Error
+            binding.reciclerView.isVisible =
+                combinedLoadStates.mediator?.refresh is LoadState.NotLoading
+            binding.progressBar.isVisible =
+                combinedLoadStates.mediator?.refresh is LoadState.Loading
+            binding.retryButton.isVisible = combinedLoadStates.mediator?.refresh is LoadState.Error
         }
 
-        retryButton.setOnClickListener { adapter.retry() }
+        binding.retryButton.setOnClickListener { adapter.retry() }
     }
 }

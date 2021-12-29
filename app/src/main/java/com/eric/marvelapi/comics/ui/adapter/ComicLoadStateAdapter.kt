@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import com.eric.marvelapi.R
+import com.eric.marvelapi.databinding.ComicLoadStateFooterItemBinding
 
 class ComicLoadStateAdapter: LoadStateAdapter<ComicLoadStateHolder>() {
     override fun onBindViewHolder(holder: ComicLoadStateHolder, loadState: LoadState) {
@@ -12,8 +13,8 @@ class ComicLoadStateAdapter: LoadStateAdapter<ComicLoadStateHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): ComicLoadStateHolder {
-        return LayoutInflater.from(parent.context)
-            .inflate(R.layout.comic_load_state_footer_item, parent, false)
+        return ComicLoadStateFooterItemBinding
+            .inflate(LayoutInflater.from(parent.context), parent, false)
             .let { ComicLoadStateHolder(it) }
     }
 }

@@ -1,5 +1,5 @@
 ext {
-    hilt_jetpack = '2.40.5'
+    hilt = '2.40.5'
     hilt_view_model = '1.0.0-alpha03'
     navitation_jetpack = '2.3.5'
     viewmodel_life_cycle = '2.4.0'
@@ -15,9 +15,11 @@ ext {
 
 dependencies {
     // hilt
-    implementation "com.google.dagger:hilt-android:$hilt_jetpack"
+    implementation "com.google.dagger:hilt-android:$hilt"
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_view_model"
-    kapt "com.google.dagger:hilt-android-compiler:$hilt_jetpack"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt"
+    androidTestImplementation "com.google.dagger:hilt-android-testing:$hilt"
+    kaptAndroidTest "com.google.dagger:hilt-android-compiler:$hilt"
 
     // retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit"

@@ -6,11 +6,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eric.core.extensions.toBRValue
 import com.eric.marvelapi.R
 import com.eric.marvelapi.comics.model.ComicModel
+import com.eric.marvelapi.databinding.ComicItemBinding
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.comic_item.view.*
 
-class ComicsViewHolder (internal val context: Context, itemView: View) :
-    RecyclerView.ViewHolder(itemView) {
+class ComicsViewHolder (private val binding: ComicItemBinding) :
+    RecyclerView.ViewHolder(binding.root) {
 
         fun bindItem(item: ComicModel) {
 
@@ -18,9 +18,9 @@ class ComicsViewHolder (internal val context: Context, itemView: View) :
                 .load(item.thumbnail?.path)
                 .placeholder(R.drawable.load_image)
                 .error(R.drawable.load_image_error)
-                .into(itemView.imageViewThumbnail)
+                .into(binding.imageViewThumbnail)
 
-            itemView.textViewTitle.text = item.title
-            itemView.textViewPrice.text = item.price?.price?.toBRValue()
+            binding.textViewTitle.text = item.title
+            binding.textViewPrice.text = item.price?.price?.toBRValue()
         }
     }

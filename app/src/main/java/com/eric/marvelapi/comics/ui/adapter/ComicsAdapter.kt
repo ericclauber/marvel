@@ -5,16 +5,15 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.eric.marvelapi.R
 import com.eric.marvelapi.comics.model.ComicModel
+import com.eric.marvelapi.databinding.ComicItemBinding
 
 class ComicsAdapter() :
     PagingDataAdapter<ComicModel, RecyclerView.ViewHolder>(COMIC_MODEL_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComicsViewHolder {
-        return LayoutInflater.from(parent.context)
-            .inflate(R.layout.comic_item, parent, false)
-            .let { ComicsViewHolder(parent.context, it) }
+        return ComicItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            .let { ComicsViewHolder(it) }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

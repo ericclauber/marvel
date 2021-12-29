@@ -1,16 +1,15 @@
 package com.eric.marvelapi.comics.ui.adapter
 
-import android.view.View
 import androidx.core.view.isVisible
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.comic_load_state_footer_item.view.*
+import com.eric.marvelapi.databinding.ComicLoadStateFooterItemBinding
 
-class ComicLoadStateHolder(itemView: View) :
-    RecyclerView.ViewHolder(itemView) {
+class ComicLoadStateHolder(private val binding: ComicLoadStateFooterItemBinding) :
+    RecyclerView.ViewHolder(binding.root) {
 
     fun bindItem(loadState: LoadState) {
 
-        itemView.progressBar.isVisible = loadState is LoadState.Loading
+        binding.progressBar.isVisible = loadState is LoadState.Loading
     }
 }
